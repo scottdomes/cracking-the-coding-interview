@@ -1,28 +1,31 @@
+// Write a method that replaces all spaces in a string with '%20', assuming that the string has sufficient space at the end for the new characters.
+// java chapter-1/questions/urlify.java
+
 public class Urlify {
   public static void urlify(String string) {
     char[] characterArray = string.toCharArray();
-    char[] replacedCharacterArray = new char[characterArray.length];
+    String replacedString = "";
 
     for (int i = 0; i < characterArray.length; i++) {
+      if (replacedString.length() >= characterArray.length - 2) {
+        break;
+      }
+  
       if (characterArray[i] == ' ') {
-        replacedCharacterArray[i] = "%20";
+        replacedString += "%20";
       } else {
-        replacedCharacterArray[i] = characterArray[i];
+        replacedString += characterArray[i];
       }
     }
 
-    String result = new String(replacedCharacterArray);
-
-    System.out.println(result);
+    System.out.println(replacedString);
   }
 
   public static void main(String[] args) {
-    String string1 = "Scott Domes";
-    String string2 = "Mr Scott Domes";
-    String string3 = " Mr Scott Domes      ";
+    String string1 = "Scott Domes   ";
+    String string2 = "Mr Scott Domes      ";
 
     urlify(string1);
     urlify(string2);
-    urlify(string3);
   }
 }
