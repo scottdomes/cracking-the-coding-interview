@@ -1,7 +1,7 @@
-# Run this file by copying 'python chapter-1/binary_tree.py' into the Console box in the bottom righthand corner and hitting 'Enter'.
+# Run this file by copying 'python chapter-1/balanced_binary_tree.py' into the Console box in the bottom righthand corner and hitting 'Enter'.
 
-# Goal: Make a custom hash table implementation in python, using a binary tree (not balanced, for simplicity)
-# See hash_table.py for a basic hash_table
+# Goal: Make a custom hash table implementation in python, using a balanced binary tree
+# See hash_table.py for a simpler version
 
 def printTree(node, level=0):
     if node != None:
@@ -27,24 +27,27 @@ class Node:
         self.right.insert(key, value)
       else:
         self.right = Node(key, value)
-  
-  def search(self, key):
+
+  def find(self, key):
     if key == self.key:
-      return self. value
+      return self.value
     elif key < self.key:
       if self.left:
-        return self.left.search(key)
+        return self.left.find(key)
     else:
       if self.right:
-        return self.right.search(key)
+        return self.right.find(key)
 
 root = Node(0)
 
 root.insert(10, 'Ten')
-root.insert(10, 'Tennn')
 root.insert(20, 'Twenty')
+root.insert(25, 'Twenty-five')
 root.insert(-10, 'Negative')
 
-print(root.search(20))
+print(root.find(10))
+print(root.find(20))
+print(root.find(25))
+print(root.find(-10))
 
-# printTree(root)
+printTree(root)
