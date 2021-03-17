@@ -8,23 +8,33 @@ import (
 )
 
 func compressString(input string) string {
-  var currentCharacter rune = -1
   var currentCharacterCount = 0
   var output strings.Builder
+  var currentCharacter = []rune(input)[0]
+  output.WriteString(string(currentCharacter))
 
-  for _, character := range input {
+  for index, character := range input {
     if currentCharacter == character {
       currentCharacterCount += 1
     } else {
       output.WriteString(strconv.Itoa(currentCharacterCount))
-      output.WriteString(string(currentCharacter))
+      output.WriteString(string(character))
 
       currentCharacter = character
-      currentCharacterCount = 0
+      currentCharacterCount = 1
+    }
+
+    if index == (len(input) - 1) {
+      output.WriteString(strconv.Itoa(currentCharacterCount))
     }
   }
   
-  return output.String()
+  var outputString = output.String()
+  if len(outputString) < len(input) {
+    return outputString
+  } else {
+    return input
+  }
 }
 
 func main() {
