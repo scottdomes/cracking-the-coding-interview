@@ -66,5 +66,4 @@ func main() {
   fmt.Println(rotatedMatrix2[2])
   fmt.Println(rotatedMatrix2[3])
   fmt.Println(rotatedMatrix2[4])
-
 }
