@@ -1,14 +1,14 @@
+// Given a string, write a function to check if it is a permutation of a palindrome.
+// rustc chapter-1/questions/palindrome.rs && ./palindrome
+
 fn is_palindrome_permutation(string: &str) -> bool {
-  let lowercased = string.to_lowercase();
-  let chars = lowercased.chars();
-  chars.filter(|c| !c.is_whitespace());
-  // let filtered = cleaned_string.filter(|c| !c.is_whitespace());
+  let mut cleaned = string.to_lowercase();
+  cleaned.retain(|c| !c.is_whitespace());
   let mut odd_numbered_letter = false;
-  for character in chars {
-    let occurences = string.matches(character).count();
+
+  for character in cleaned.chars() {
+    let occurences = cleaned.matches(character).count();
     let is_odd = occurences % 2 != 0;
-    // println!("{}", is_odd);
-    // println!("{}", character);
 
     if is_odd {
       if odd_numbered_letter {
@@ -31,5 +31,4 @@ fn main() {
   println!("{}", is_palindrome_permutation(string2));
   println!("{}", is_palindrome_permutation(string3));
   println!("{}", is_palindrome_permutation(string4));
-
 }
