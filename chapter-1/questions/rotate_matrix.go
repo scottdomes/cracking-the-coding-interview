@@ -6,10 +6,15 @@ import (
   "math/rand"
 )
 
-func generateMatrix() [3][3]int {
-  matrix := [3][3]int{}
-  for i:=0; i<3; i++ {
-      for j:=0; j<3; j++ {
+func generateMatrix(n int) [][]int {
+  matrix := make([][]int, n) 
+
+  for i:=0; i<n; i++ {
+    matrix[i] = make([]int, n) 
+  }
+
+  for i:=0; i<n; i++ {
+      for j:=0; j<n; j++ {
           matrix[i][j] = rand.Intn(10)
       }
   }
@@ -17,12 +22,22 @@ func generateMatrix() [3][3]int {
   return matrix
 }
 
-func rotateMatrix(matrix [3][3]int) [3][3]int {
-  return matrix
+func rotateMatrix(matrix [][]int) [][]int {
+  n := len(matrix)
+
+  newMatrix := generateMatrix(n)
+
+  for row:=0; row<n; row++ {
+    for column:=0; column<n; column++ {
+      newMatrix[row][column] = matrix[n - column - 1][row]
+    }
+  }
+
+  return newMatrix
 }
 
 func main() {
-  matrix := generateMatrix()
+  matrix := generateMatrix(3)
   
   fmt.Println(matrix[0])
   fmt.Println(matrix[1])
@@ -34,4 +49,22 @@ func main() {
   fmt.Println(rotatedMatrix[0])
   fmt.Println(rotatedMatrix[1])
   fmt.Println(rotatedMatrix[2])
+
+  matrix2 := generateMatrix(5)
+
+  fmt.Println(matrix2[0])
+  fmt.Println(matrix2[1])
+  fmt.Println(matrix2[2])
+  fmt.Println(matrix2[3])
+  fmt.Println(matrix2[4])
+
+  rotatedMatrix2 := rotateMatrix(matrix2)
+
+  fmt.Println("Rotated:")
+  fmt.Println(rotatedMatrix2[0])
+  fmt.Println(rotatedMatrix2[1])
+  fmt.Println(rotatedMatrix2[2])
+  fmt.Println(rotatedMatrix2[3])
+  fmt.Println(rotatedMatrix2[4])
+
 }
